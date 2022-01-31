@@ -1,0 +1,148 @@
+* {
+  font-family: arial, sans-serif;
+  margin: 0;
+}
+
+body,
+body > div {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-section {
+  flex-grow: 1;
+}
+
+#main-section > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbar {
+  display: flex;
+  background-color: lightblue;
+  justify-content: space-evenly;
+  padding: 1rem;
+  margin-bottom: 20px;
+}
+
+#links {
+  justify-content: right;
+  padding: 25px;
+}
+
+.link {
+  padding: 20px;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+}
+
+.link:hover {
+  color: darkgray;
+}
+
+.main-head,
+#main-posts,
+.main-login {
+  align-self: center;
+  text-align: center;
+  margin: 10px;
+  padding-top: 50px;
+}
+
+#all-posts,
+#new-posts,
+#my-posts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.post-results {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.post-title {
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.post-info {
+  padding: 10px 20px;
+  font-weight: lighter;
+  text-align: left;
+}
+
+#main-header {
+  padding: 20px;
+}
+
+.sign-in,
+#new-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#create-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input,
+button {
+  flex: 1 0 auto;
+  align-self: center;
+  margin: 10px;
+  text-align: center;
+}
+#new-post > .input-posts {
+  width: 500px;
+}
+
+#new-post > select,
+#new-post > label {
+  width: 50px;
+  text-align: center;
+  align-self: center;
+}
+#error {
+  color: red;
+  text-align: center;
+}
+
+.main-head {
+  flex-direction: column;
+}
+
+#main-profile {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+#profile-title {
+  margin-bottom: 40px;
+}
+
+#messages {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.my-info {
+  padding: 10px;
+  border-radius: 45%;
+  background-color: darkgray;
+}
