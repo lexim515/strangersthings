@@ -3,16 +3,16 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 const BASE_URL =
-  "https://strangers-things.herokuapp.com/api/2110-ftb-rm-web-pt/";
+  "https://strangers-things.herokuapp.com/api/2110-ftb-et-web-pt/";
 const API_REGISTER = `${BASE_URL}users/register`;
 const API_LOGIN = `${BASE_URL}users/login`;
 const API_USER = `${BASE_URL}users/me`;
 
-const AccountForm = ({ token, setToken, action }) => {
+const AccountForm = ({ token, setToken, action, error, setError }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
   const isLogin = action === "login";
   const title = isLogin ? "Login" : "Register";
@@ -103,3 +103,4 @@ const AccountForm = ({ token, setToken, action }) => {
 };
 
 export default AccountForm;
+
