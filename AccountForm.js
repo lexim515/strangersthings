@@ -6,14 +6,11 @@ const BASE_URL =
   "https://strangers-things.herokuapp.com/api/2110-ftb-et-web-pt/";
 const API_REGISTER = `${BASE_URL}users/register`;
 const API_LOGIN = `${BASE_URL}users/login`;
-const API_USER = `${BASE_URL}users/me`;
 
-const AccountForm = ({ token, setToken, action, error, setError }) => {
+const AccountForm = ({ setToken, action, error, setError }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  // const [error, setError] = useState("");
-
   const isLogin = action === "login";
   const title = isLogin ? "Login" : "Register";
   const oppositeTitle = isLogin ? "Register" : "Login";
@@ -46,15 +43,12 @@ const AccountForm = ({ token, setToken, action, error, setError }) => {
         }
         setToken(info.data.token);
         localStorage.setItem("token", info.data.token);
-        // console.log(username);
-        // console.log(password);
         history.push("/");
       } catch (error) {
         console.error(error);
       }
     }
   };
-  //   console.log(token);
 
   return (
     <>
@@ -103,4 +97,5 @@ const AccountForm = ({ token, setToken, action, error, setError }) => {
 };
 
 export default AccountForm;
+
 
