@@ -9,15 +9,13 @@ import {
   Profile,
   Message,
   CreatePost,
-  // PostDetails,
+  EditPost,
+  PostDetails,
 } from "./Components";
-import { useHistory } from "react-router";
 
 const BASE_URL =
   "https://strangers-things.herokuapp.com/api/2110-ftb-et-web-pt/";
 const API_POSTS = `${BASE_URL}posts`;
-const API_REGISTER = `${BASE_URL}users/register`;
-const API_LOGIN = `${BASE_URL}users/login`;
 const API_USER = `${BASE_URL}users/me`;
 
 const Main = () => {
@@ -29,11 +27,10 @@ const Main = () => {
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
   const [willDeliver, setWillDeliver] = useState(true);
-  const [message, setMessage] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
-
-  const history = useHistory();
+  const [content, setContent] = useState("");
+  const [message, setMessage] = useState("");
 
   const fetchPosts = async () => {
     const headers = token
@@ -49,13 +46,11 @@ const Main = () => {
       headers,
     });
     const info = await response.json();
-    // console.log(info);
     setPosts(info.data.posts);
   };
 
   const fetchUser = async () => {
     const lsToken = localStorage.getItem("token");
-    console.log(lsToken);
     if (lsToken) {
       setToken(lsToken);
     }
@@ -67,7 +62,6 @@ const Main = () => {
         },
       });
       const info = await response.json();
-      console.log(info.data);
       setUserData(info.data);
       setUsername(info.data.username);
     } catch (error) {
@@ -75,15 +69,14 @@ const Main = () => {
     }
   };
 
-  console.log(userData);
-  console.log(username);
-  console.log(token);
-
-  // console.log(posts);
   useEffect(() => {
-    fetchUser();
     fetchPosts();
+    fetchUser();
   }, [token]);
+
+  // useEffect(() => {
+  //   fetchUser();
+  // }, [content]);
 
   return (
     <>
@@ -101,18 +94,8 @@ const Main = () => {
         <Route exact path="/">
           <Home userData={userData} />
         </Route>
-        <Route path="/posts">
+        <Route exact path="/posts">
           <Posts
-            title={title}
-            setTitle={setTitle}
-            description={description}
-            setDescription={setDescription}
-            price={price}
-            setPrice={setPrice}
-            location={location}
-            setLocation={setLocation}
-            willDeliver={willDeliver}
-            setWillDeliver={setWillDeliver}
             posts={posts}
             setPosts={setPosts}
             userData={userData}
@@ -134,18 +117,37 @@ const Main = () => {
             willDeliver={willDeliver}
             error={error}
             token={token}
+            location={location}
+            setLocation={setLocation}
+            fetchPosts={fetchPosts}
+          />
+        </Route>
+        <Route path="/posts/:id">
+          <EditPost
+            userData={userData}
+            setTitle={setTitle}
+            setDescription={setDescription}
+            setPrice={setPrice}
+            setWillDeliver={setWillDeliver}
+            setError={setError}
+            title={title}
+            description={description}
+            price={price}
+            willDeliver={willDeliver}
+            error={error}
+            token={token}
             posts={posts}
             location={location}
             setLocation={setLocation}
+            fetchPosts={fetchPosts}
           />
         </Route>
-        {/* <Route path="/posts/:id">
+        <Route path="/posts/post/:id">
           <PostDetails posts={posts} userData={userData} />
-        </Route> */}
+        </Route>
         <Route path="/register">
           <AccountForm
             action="register"
-            token={token}
             setToken={setToken}
             error={error}
             setError={setError}
@@ -154,29 +156,22 @@ const Main = () => {
         <Route path="/login">
           <AccountForm
             action="login"
-            token={token}
             setToken={setToken}
             error={error}
             setError={setError}
           />
         </Route>
         <Route path="/profile">
-          <Profile
-            posts={posts}
-            setPosts={setPosts}
-            token={token}
-            userData={userData}
-            title={title}
-            description={description}
-            price={price}
-            location={location}
-            willDeliver={willDeliver}
+          <Profile posts={posts} setPosts={setPosts} userData={userData} />
+        </Route>
+        <Route path="/message/:id">
+          <Message
+            content={content}
+            setContent={setContent}
+            fetchUser={fetchUser}
             message={message}
             setMessage={setMessage}
           />
-        </Route>
-        <Route path="/message/:id">
-          <Message message={message} setMessage={setMessage} />
         </Route>
       </div>
     </>
